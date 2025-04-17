@@ -13,3 +13,9 @@ test("the <li> has a className of 'in-cart' when the Add to Cart button is click
   fireEvent.click(screen.getByText(/ Cart/));
   expect(container.querySelector(".in-cart")).toBeInTheDocument();
 });
+
+test("renders the Item component", () => {
+  render(<Item name="Milk" category="Dairy" />);
+  expect(screen.getByText("Milk")).toBeInTheDocument();
+  expect(screen.getByText("Dairy")).toBeInTheDocument();
+});

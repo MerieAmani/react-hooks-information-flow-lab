@@ -28,3 +28,13 @@ test("changes back to 'light' mode when the button is clicked twice", () => {
 
   expect(container.querySelector(".light")).toBeInTheDocument();
 });
+
+const mockItems = [
+  { id: 1, name: "Milk", category: "Dairy" },
+  { id: 2, name: "Carrots", category: "Produce" },
+];
+
+test("renders the App component", () => {
+  render(<App items={mockItems} />);
+  expect(screen.getByText("Shopping List")).toBeInTheDocument();
+});

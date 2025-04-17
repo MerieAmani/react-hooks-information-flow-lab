@@ -32,3 +32,17 @@ test("displays only items that match the selected category", () => {
 
   expect(container.querySelector(".Items").children).toHaveLength(1);
 });
+
+import { render, screen } from "@testing-library/react";
+import ShoppingList from "../components/ShoppingList";
+
+const mockItems = [
+  { id: 1, name: "Milk", category: "Dairy" },
+  { id: 2, name: "Carrots", category: "Produce" },
+];
+
+test("renders the ShoppingList component", () => {
+  render(<ShoppingList items={mockItems} />);
+  expect(screen.getByText("Milk")).toBeInTheDocument();
+  expect(screen.getByText("Carrots")).toBeInTheDocument();
+});

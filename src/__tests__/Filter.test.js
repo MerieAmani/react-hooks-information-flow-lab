@@ -2,17 +2,12 @@ import "@testing-library/jest-dom";
 import { render, screen, fireEvent } from "@testing-library/react";
 import Filter from "../components/Filter";
 
-test("displays the <select> element", () => {
-  render(<Filter />);
-  expect(screen.queryByRole("combobox")).toBeInTheDocument();
-});
+test("renders the Filter component and handles category change", () => {
+  const mockOnCategoryChange = jest.fn();
+  render(<Filter onCategoryChange={mockOnCategoryChange} />);
 
-test("calls the onCategoryChange callback prop when the <select> is changed", () => {
-  const onCategoryChange = jest.fn();
-  render(<Filter onCategoryChange={onCategoryChange} />);
+  const select = screen.getByRole("combobox");
+  fireEvent.change(select, { target: { value: "Dairy" } });
 
-  fireEvent.change(screen.queryByRole("combobox"), {
-    target: { value: "Dairy" },
-  });
-  expect(onCategoryChange).toHaveBeenCalled();
+  expect(mockOnCategoryChange).toHaveBeenCalledWith("Dairy");
 });
